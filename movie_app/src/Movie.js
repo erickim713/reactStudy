@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 
-class MovieCard extends Component {
-    render() {
-       return (
-        <div>
-            <MoviePoster link={this.props.link}/>
-            <h1> {this.props.title} </h1>
-        </div>
-       )
-    }
+class TodoCard extends Component {
+  state = {
+    done: false,
+    id: this.props.id,
+    title: this.props.title
+  }
+  componentWillMount() {
+  }
+
+  componentDidMount() {
+
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> {this.state.id} </h1>
+        <h2> {this.state.title} </h2>
+      </div>
+    )
+  }
 }
 
-class MoviePoster extends Component {
-    render() {
-        return (
-            <img src = {this.props.link}/>
-        )
-    }
-}
-
-export default MovieCard;
+export default TodoCard;

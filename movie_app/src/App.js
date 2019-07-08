@@ -1,43 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Movie from './Movie';
+import TodoCard from './Movie';
+import InputField from './Input';
 
-// const movies = [
-//     'Tate no Yuusha no Nariagari',
-//     'Overlord'
-// ];
+class App extends Component {
+
+  state = {
+    todoList: [
+      {
+        "id": 1,
+        "title": "SPA 개념"
+      },
+      {
+        "id": 2,
+        "title": "Node.js 알아보기"
+      },
+      {
+        "id": 3,
+        "title": "React.js 맛보기"
+      },
+      {
+        "id": 4,
+        "title": "React.js 사용하는 방법"
+      }
+    ]
+  }
+
+  addTodo = (title) => {
+    this.state.todoList.push({id: this.state.todoList.length + 1, title})
+  }
 
 
-// const moviePostersLinks = [
-//     'https://cdn.myanimelist.net/images/anime/1490/101365.jpg',
-//     'https://i.ytimg.com/vi/uhlBqFj9kDw/maxresdefault.jpg',
-// ];
 
-// another way of  doing the same thing but fewer code
-
-const movisses = [
-   {
-       title: 'Tate no Yuusha no Nariagarie',
-       link: 'https://cdn.myanimelist.net/images/anime/1490/101365.jpg',
-   },
-   {
-       title: 'Overlord',
-       link: 'https://i.ytimg.com/vi/uhlBqFj9kDw/maxresdefault.jpg',
-   },
-]
-
-
-function App() {
-  return (
-    <div className="App">
-        {movisses.map(
-            (currentMovie) => {
-                return <Movie title={currentMovie.title} link={currentMovie.link}/>
-                }
-            )
+  render() {
+    return (
+      <div className="App">
+        {
+          this.state.todoList.map(
+            (todoElement, index) => {
+              return <TodoCard title={todoElement.title} key={index} id={todoElement.id} />
+            })
         }
-    </div>
-  );
+
+        <InputField addTodo={this.addTodo} />
+      </div>
+    );
+  }
 }
 
 export default App;
