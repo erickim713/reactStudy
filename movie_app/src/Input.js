@@ -3,16 +3,18 @@ import React, { Component } from 'react';
 class InputField extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      todoTitle: ''
+    }
+    this.addToDo = this.addToDo.bind(this);
   }
 
-  state = {
-    todoTitle: 'ffff'
-  }
 
-  addT = (e) => {
+
+  addToDo = (e) => {
     console.log(this.state.todoTitle)
     console.log(this.props)
-    this.props.addTodo(this.state.todoTitle)
+    this.props.addTodo(this.state)
 
   }
 
@@ -32,7 +34,7 @@ class InputField extends Component {
         />
         <button
           type="button"
-          onClick={this.addT}
+          onClick={this.addToDo}
         > Add to TodoList </button>
       </div>
     )

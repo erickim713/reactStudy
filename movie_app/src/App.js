@@ -26,8 +26,16 @@ class App extends Component {
     ]
   }
 
-  addTodo = (title) => {
-    this.state.todoList.push({id: this.state.todoList.length + 1, title})
+  addTodo = (_State) => {
+    console.log('app: addTodo => ', _State);
+    let currentList = this.state.todoList;
+    console.log(currentList);
+    currentList.push({
+      id: currentList.length + 1,
+      title: _State.todoTitle
+    })
+    console.log('after being updated ', currentList )
+    this.setState({todoList: currentList})
   }
 
 
