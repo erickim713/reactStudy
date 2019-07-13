@@ -7,13 +7,14 @@ class InputField extends Component {
       todoTitle: ''
     }
     this.addToDo = this.addToDo.bind(this);
+    this.clearInput = this.clearInput.bind(this);
   }
 
-
+  clearInput = () => {
+    this.setState({todoTitle: ''})
+  }
 
   addToDo = (e) => {
-    console.log(this.state.todoTitle)
-    console.log(this.props)
     this.props.addTodo(this.state)
 
   }
@@ -24,6 +25,13 @@ class InputField extends Component {
     })
   }
 
+  _onKeyDown = (e) => {
+    if(e.keyCode === 13) {
+      this.addToDo();
+      this.clearInput();
+    }
+  }
+
   render () {
     return (
       <div>
@@ -31,6 +39,7 @@ class InputField extends Component {
           type="text"
           size="10"
           onChange={this.handleChange}
+          onKeyDown={this._onKeyDown}
         />
         <button
           type="button"
