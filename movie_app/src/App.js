@@ -1,59 +1,75 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodoCard from './Movie';
-import InputField from './Input';
+import PlayerCard from './components/PlayerCard';
 
 class App extends Component {
-
   state = {
-    todoList: [
+    people: [
       {
-        "id": 1,
-        "title": "SPA 개념"
+        id: 2,
+        name: '장홍준',
+        username: 'hongjun7',
+        tier: 'diamond',
+        score: 14,
       },
       {
-        "id": 2,
-        "title": "Node.js 알아보기"
+        id: 1,
+        name: '김형우',
+        username: 'erickim713',
+        tier: 'gold',
+        score: 37,
       },
       {
-        "id": 3,
-        "title": "React.js 맛보기"
+        id: 3,
+        name: '성기영',
+        username: 'SungX',
+        tier: 'gold',
+        score: 0,
       },
-      {
-        "id": 4,
-        "title": "React.js 사용하는 방법"
-      }
-    ]
-  }
+    ],
+  };
 
-  addTodo = (_State) => {
-    console.log('app: addTodo => ', _State);
-    let currentList = this.state.todoList;
-    console.log(currentList);
-    currentList.push({
-      id: currentList.length + 1,
-      title: _State.todoTitle
-    })
-    console.log('after being updated ', currentList )
-    this.setState({todoList: currentList})
-  }
-
-
+  // addTodo = _State => {
+  //   console.log('app: addTodo => ', _State);
+  //   let currentList = this.state.todoList;
+  //   console.log(currentList);
+  //   currentList.push({
+  //     id: currentList.length + 1,
+  //     title: _State.todoTitle,
+  //   });
+  //   console.log('after being updated ', currentList);
+  //   this.setState({ todoList: currentList });
+  // };
 
   render() {
     return (
       <div className="App">
-        {
-          this.state.todoList.map(
-            (todoElement, index) => {
-              return <TodoCard title={todoElement.title} key={index} id={todoElement.id} />
-            })
-        }
-
-        <InputField addTodo={this.addTodo} />
+        {this.state.people.map(player => {
+          return (
+            <PlayerCard
+              name={player.name}
+              username={player.username}
+              score={player.score}
+              tier={player.tier}
+              key={player.id}
+            />
+          );
+        })}
       </div>
     );
   }
 }
 
 export default App;
+
+// {this.state.todoList.map((todoElement, index) => {
+//   return (
+//     <TodoCard
+//       title={todoElement.title}
+//       key={index}
+//       id={todoElement.id}
+//     />
+//   );
+// })}
+
+// <InputField addTodo={this.addTodo} />
