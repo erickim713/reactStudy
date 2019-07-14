@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Row, Col } from 'antd';
 
 const diamond = require('../assets/diamond.png');
 const platinum = require('../assets/platinum.png');
@@ -7,7 +8,7 @@ const gold = require('../assets/gold.png');
 const silver = require('../assets/silver.png');
 const unranked = require('../assets/unranked.png');
 
-const Card = styled.span`
+const Card = styled.div`
   height: 120px;
   width: 450px;
   background-color: #fff;
@@ -20,6 +21,7 @@ const Card = styled.span`
 `;
 
 const TierImage = styled.img`
+  width: 120px;
   height: 80%;
   padding: 12px 10px;
   border-right: 0.5px black solid;
@@ -29,13 +31,9 @@ const Information = styled.div`
   display: inline-block;
 `;
 
-const UserName = styled.p`
-  display: inline-block;
-`;
+const UserName = styled.p``;
 
-const Score = styled.p`
-  display: inline-block;
-`;
+const Score = styled.p``;
 
 class PlayerCard extends Component {
   chooseTier(tier) {
@@ -58,13 +56,19 @@ class PlayerCard extends Component {
     const score = this.props.score;
     console.log(this.chooseTier());
     return (
-      <Card>
-        <TierImage src={this.chooseTier(this.props.tier)} alt={'hello'} />
-        <Information>
-          <UserName>{username} </UserName>
-          <Score>{score}</Score>
-        </Information>
-      </Card>
+      <div>
+        <Row>
+          <Col span={6}>
+            <TierImage src={this.chooseTier(this.props.tier)} alt={'hello'} />
+          </Col>
+          <Col span={12}>
+            <Information>
+              <UserName>{username} </UserName>
+              <Score>{score}</Score>
+            </Information>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }
