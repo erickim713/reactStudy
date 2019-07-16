@@ -16,7 +16,7 @@ class App extends Component {
         id: 1,
         name: '김형우',
         username: 'erickim713',
-        tier: 'gold',
+        tier: 'platinum',
         score: 37,
       },
       {
@@ -26,6 +26,20 @@ class App extends Component {
         tier: 'gold',
         score: 0,
       },
+      {
+        id: 4,
+        name: '박예찬',
+        username: 'Jeju Riven',
+        tier: 'silver',
+        score: 42
+      },
+      {
+        id: 5,
+        name: '브론즈',
+        username: '브론즈 태훈잌ㅋ',
+        tier: 'bronze',
+        score: 80
+      }
     ],
   };
 

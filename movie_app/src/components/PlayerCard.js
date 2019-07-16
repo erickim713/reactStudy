@@ -9,8 +9,7 @@ const silver = require('../assets/silver.png');
 const unranked = require('../assets/unranked.png');
 
 const Card = styled.div`
-  height: 120px;
-  width: 450px;
+  display: flex;
   background-color: #fff;
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
@@ -18,22 +17,32 @@ const Card = styled.div`
   overflow: hidden;
   position: relative;
   margin: 1.5rem;
+  min-width: 320px;
 `;
 
 const TierImage = styled.img`
-  width: 120px;
-  height: 80%;
+  height: 20%;
+  width: 20%;
   padding: 12px 10px;
-  border-right: 0.5px black solid;
+
 `;
 
 const Information = styled.div`
-  display: inline-block;
+  flex: auto;
 `;
 
-const UserName = styled.p``;
+const UserName = styled.p`
+  font-family: 'Lato', sans-serif;
+  margin: 10px 2px;
+`;
 
-const Score = styled.p``;
+const Score = styled.p`
+  font-family: 'Roboto', sans-serif;
+`;
+
+const ProgressBar = styled.div`
+  width: 100%;
+`
 
 class PlayerCard extends Component {
   chooseTier(tier) {
@@ -51,24 +60,25 @@ class PlayerCard extends Component {
     }
   }
 
+// div {
+//     background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+//                 radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+// } gold gradient
+
+
   render() {
     const username = this.props.username;
     const score = this.props.score;
     console.log(this.chooseTier());
     return (
-      <div>
-        <Row>
-          <Col span={6}>
-            <TierImage src={this.chooseTier(this.props.tier)} alt={'hello'} />
-          </Col>
-          <Col span={12}>
-            <Information>
-              <UserName>{username} </UserName>
-              <Score>{score}</Score>
-            </Information>
-          </Col>
-        </Row>
-      </div>
+      <Card>
+        <TierImage src={this.chooseTier(this.props.tier)} alt={'hello'} />
+        <Information>
+          <UserName>{username} </UserName>
+          <Score>{score}</Score>
+          <ProgressBar> </ProgressBar>
+        </Information>
+      </Card>
     );
   }
 }
