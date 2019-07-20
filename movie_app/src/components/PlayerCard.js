@@ -1,52 +1,74 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+import { Progress, Tooltip } from 'antd';
 
+const challenger = require('../assets/challenger.png');
+const grandMaster = require('../assets/grandmaster.png');
+const master = require('../assets/master.png');
 const diamond = require('../assets/diamond.png');
 const platinum = require('../assets/platinum.png');
 const gold = require('../assets/gold.png');
 const silver = require('../assets/silver.png');
+const bronze = require('../assets/bronze.png');
 const unranked = require('../assets/unranked.png');
 
 const Card = styled.div`
   display: flex;
   background-color: #fff;
+  width: 80%;
   background: linear-gradient(#f8f8f8, #fff);
   box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
-  overflow: hidden;
-  position: relative;
-  margin: 1.5rem;
+  margin: 1.5rem auto;
   min-width: 320px;
 `;
 
 const TierImage = styled.img`
-  height: 20%;
-  width: 20%;
+  height: 10%;
+  width: 10%;
   padding: 12px 10px;
 
 `;
 
 const Information = styled.div`
   flex: auto;
+  display: flex;
 `;
 
 const UserName = styled.p`
   font-family: 'Lato', sans-serif;
   margin: 10px 2px;
+  font-size: 2.5vw;
 `;
 
 const Score = styled.p`
+  font-size: 1.5vw;
   font-family: 'Roboto', sans-serif;
 `;
 
-const ProgressBar = styled.div`
-  width: 100%;
-`
+const GeneralInfo = styled.div`
+  flex: 1;
+`;
+
+const WinRatio = styled.div`
+
+`;
 
 class PlayerCard extends Component {
+
+  constructor(props) {
+    super(props);
+
+  }
+
   chooseTier(tier) {
     switch (tier) {
+      case 'challenger':
+        return challenger;
+      case 'grandMaster':
+        return grandMaster;
+      case 'master':
+        return master;
       case 'diamond':
         return diamond;
       case 'platinum':
@@ -55,28 +77,32 @@ class PlayerCard extends Component {
         return gold;
       case 'silver':
         return silver;
+      case 'bronze':
+        return bronze;
       default:
         return unranked;
     }
   }
 
-// div {
-//     background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
-//                 radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-// } gold gradient
-
-
   render() {
-    const username = this.props.username;
-    const score = this.props.score;
-    console.log(this.chooseTier());
+    const username = this.props.player.username;
+    const score = this.props.player.score;
+    const progress = this.props.player.score || 0;
+    const winRatio = (this.props.player.wins/(this.props.player.wins + this.props.player.losses) * 100).toPrecision(2);
     return (
       <Card>
-        <TierImage src={this.chooseTier(this.props.tier)} alt={'hello'} />
+        <TierImage src={this.chooseTier(this.props.player.tier)} alt={'hello'} />
         <Information>
+        <GeneralInfo>
           <UserName>{username} </UserName>
           <Score>{score}</Score>
-          <ProgressBar> </ProgressBar>
+          <Progress percent={progress} status="active" showInfo={true} />
+        </GeneralInfo>
+        <WinRatio>
+          <Tooltip title='3 done / 3 in progress / 4 to do'>
+            <Progress percent={100} successPercent={isNaN(winRatio) ? 0 : winRatio} strokeColor="red" type="circle" />
+          </Tooltip>
+        </WinRatio>
         </Information>
       </Card>
     );
