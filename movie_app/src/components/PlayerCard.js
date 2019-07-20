@@ -24,15 +24,17 @@ const Card = styled.div`
 `;
 
 const TierImage = styled.img`
-  height: 10%;
-  width: 10%;
-  padding: 12px 10px;
-
+    height: auto;
+    width: auto;
+    max-width: 50%;
 `;
 
 const Information = styled.div`
-  flex: auto;
+  flex: 2;
+  flex-direction: column;
   display: flex;
+  margin: 0.5em;
+  padding: 0.5em;
 `;
 
 const UserName = styled.p`
@@ -46,12 +48,18 @@ const Score = styled.p`
   font-family: 'Roboto', sans-serif;
 `;
 
-const GeneralInfo = styled.div`
-  flex: 1;
-`;
-
 const WinRatio = styled.div`
 
+`;
+
+const Description = styled.div`
+`;
+
+const TierInfo = styled.div`
+  flex: 0.7;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
 `;
 
 class PlayerCard extends Component {
@@ -91,18 +99,17 @@ class PlayerCard extends Component {
     const winRatio = (this.props.player.wins/(this.props.player.wins + this.props.player.losses) * 100).toPrecision(2);
     return (
       <Card>
-        <TierImage src={this.chooseTier(this.props.player.tier)} alt={'hello'} />
+        <TierInfo>
+          <TierImage src={this.chooseTier(this.props.player.tier)} alt={'hello'} />
+          <Description> {this.props.player.tier}  {this.props.player.division} </Description>
+        </TierInfo>
         <Information>
-        <GeneralInfo>
+
           <UserName>{username} </UserName>
           <Score>{score}</Score>
-          <Progress percent={progress} status="active" showInfo={true} />
-        </GeneralInfo>
-        <WinRatio>
-          <Tooltip title='3 done / 3 in progress / 4 to do'>
-            <Progress percent={100} successPercent={isNaN(winRatio) ? 0 : winRatio} strokeColor="red" type="circle" />
-          </Tooltip>
-        </WinRatio>
+          <Progress percent={progress} strokeWidth={10} status="active" showInfo={true} format={(percent) => {
+            return  percent + ' LP';
+            }} />
         </Information>
       </Card>
     );
