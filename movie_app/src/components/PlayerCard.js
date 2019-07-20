@@ -72,20 +72,36 @@ class PlayerCard extends Component {
   chooseTier(tier) {
     switch (tier) {
       case 'challenger':
+        // from: '#166CF8',
+        // to: '#FDF2E0',
         return challenger;
       case 'grandMaster':
+        // from: '#D11B21',
+        // to: '#0B070A',
         return grandMaster;
       case 'master':
+        // from: '#D028E1',
+        // to: '#130516',
         return master;
       case 'diamond':
+        // from: '#303054',
+        // to: '#E7CEF8',
         return diamond;
       case 'platinum':
+        // from: '#174A51',
+        // to: '#759895',
         return platinum;
       case 'gold':
+        // from: '#A86B29',
+        // to: '#EEBF65',
         return gold;
       case 'silver':
+        // from: '#2A3435',
+        // to: '#ABB4B7',
         return silver;
       case 'bronze':
+        // from: '#4E271A',
+        // to: '#C8A98C',
         return bronze;
       default:
         return unranked;
@@ -95,19 +111,23 @@ class PlayerCard extends Component {
   render() {
     const username = this.props.player.username;
     const score = this.props.player.score;
+    const wins = this.props.player.wins;
+    const losses = this.props.player.losses;
     const progress = this.props.player.score || 0;
     const winRatio = (this.props.player.wins/(this.props.player.wins + this.props.player.losses) * 100).toPrecision(2);
     return (
       <Card>
         <TierInfo>
-          <TierImage src={this.chooseTier(this.props.player.tier)} alt={'hello'} />
+          <TierImage src={this.chooseTier('challenger')} alt={'hello'} />
           <Description> {this.props.player.tier}  {this.props.player.division} </Description>
         </TierInfo>
         <Information>
-
           <UserName>{username} </UserName>
-          <Score>{score}</Score>
-          <Progress percent={progress} strokeWidth={10} status="active" showInfo={true} format={(percent) => {
+          <Score>{wins}/{losses}</Score>
+          <Progress percent={progress} strokeWidth={10} status="active" strokeColor={{
+        from: '#166CF8',
+        to: '#FDF2E0',
+      }} showInfo={true} format={(percent) => {
             return  percent + ' LP';
             }} />
         </Information>
