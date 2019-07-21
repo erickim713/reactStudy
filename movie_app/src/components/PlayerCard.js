@@ -67,41 +67,60 @@ class PlayerCard extends Component {
   chooseTier(tier) {
     switch (tier) {
       case 'challenger':
-        // from: '#166CF8',
-        // to: '#FDF2E0',
         return challenger;
       case 'grandMaster':
-        // from: '#D11B21',
-        // to: '#0B070A',
         return grandMaster;
       case 'master':
-        // from: '#D028E1',
-        // to: '#130516',
         return master;
       case 'diamond':
-        // from: '#303054',
-        // to: '#E7CEF8',
         return diamond;
       case 'platinum':
-        // from: '#174A51',
-        // to: '#759895',
         return platinum;
       case 'gold':
-        // from: '#A86B29',
-        // to: '#EEBF65',
         return gold;
       case 'silver':
-        // from: '#2A3435',
-        // to: '#ABB4B7',
         return silver;
       case 'bronze':
-        // from: '#4E271A',
-        // to: '#C8A98C',
         return bronze;
       default:
         return unranked;
     }
   }
+
+  colors = {
+    challenger: {
+      from: '#166CF8',
+      to: '#FDF2E0',
+    },
+    grandMaster: {
+      from: '#D11B21',
+      to: '#0B070A',
+    },
+    master: {
+      from: '#D028E1',
+      to: '#130516',
+    },
+    diamond: {
+      from: '#303054',
+      to: '#E7CEF8',
+    },
+    platinum: {
+      from: '#174A51',
+      to: '#759895',
+    },
+    gold: {
+      from: '#A86B29',
+      to: '#EEBF65',
+    },
+    silver: {
+      from: '#2A3435',
+      to: '#ABB4B7',
+    },
+    bronze: {
+      from: '#4E271A',
+      to: '#C8A98C',
+    },
+  };
 
   render() {
     const username = this.props.player.username;
@@ -135,10 +154,7 @@ class PlayerCard extends Component {
             percent={progress}
             strokeWidth={10}
             status="active"
-            strokeColor={{
-              from: '#166CF8',
-              to: '#FDF2E0',
-            }}
+            strokeColor={this.colors[this.props.player.tier]}
             showInfo={true}
             format={percent => {
               return percent + ' LP';
