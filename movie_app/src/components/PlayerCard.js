@@ -24,9 +24,9 @@ const Card = styled.div`
 `;
 
 const TierImage = styled.img`
-    height: auto;
-    width: auto;
-    max-width: 50%;
+  height: auto;
+  width: auto;
+  max-width: 50%;
 `;
 
 const Information = styled.div`
@@ -48,12 +48,9 @@ const Score = styled.p`
   font-family: 'Roboto', sans-serif;
 `;
 
-const WinRatio = styled.div`
+const WinRatio = styled.div``;
 
-`;
-
-const Description = styled.div`
-`;
+const Description = styled.div``;
 
 const TierInfo = styled.div`
   flex: 0.7;
@@ -63,10 +60,8 @@ const TierInfo = styled.div`
 `;
 
 class PlayerCard extends Component {
-
   constructor(props) {
     super(props);
-
   }
 
   chooseTier(tier) {
@@ -114,22 +109,41 @@ class PlayerCard extends Component {
     const wins = this.props.player.wins;
     const losses = this.props.player.losses;
     const progress = this.props.player.score || 0;
-    const winRatio = (this.props.player.wins/(this.props.player.wins + this.props.player.losses) * 100).toPrecision(2);
+    const winRatio = (
+      (this.props.player.wins /
+        (this.props.player.wins + this.props.player.losses)) *
+      100
+    ).toPrecision(2);
     return (
       <Card>
         <TierInfo>
-          <TierImage src={this.chooseTier('challenger')} alt={'hello'} />
-          <Description> {this.props.player.tier}  {this.props.player.division} </Description>
+          <TierImage
+            src={this.chooseTier(this.props.player.tier)}
+            alt={'hello'}
+          />
+          <Description>
+            {' '}
+            {this.props.player.tier} {this.props.player.division}{' '}
+          </Description>
         </TierInfo>
         <Information>
           <UserName>{username} </UserName>
-          <Score>{wins}/{losses}</Score>
-          <Progress percent={progress} strokeWidth={10} status="active" strokeColor={{
-        from: '#166CF8',
-        to: '#FDF2E0',
-      }} showInfo={true} format={(percent) => {
-            return  percent + ' LP';
-            }} />
+          <Score>
+            {wins}/{losses}
+          </Score>
+          <Progress
+            percent={progress}
+            strokeWidth={10}
+            status="active"
+            strokeColor={{
+              from: '#166CF8',
+              to: '#FDF2E0',
+            }}
+            showInfo={true}
+            format={percent => {
+              return percent + ' LP';
+            }}
+          />
         </Information>
       </Card>
     );
