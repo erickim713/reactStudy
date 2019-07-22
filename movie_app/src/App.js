@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PlayerCard from './components/PlayerCard';
 import styled from 'styled-components';
+import EntryForm from './components/EntryForm';
 
 const Wrapper = styled.div``;
 
@@ -115,9 +116,7 @@ class App extends Component {
     return (
       <div className="App">
         <Wrapper>
-          {this.state.people.map((player, index) => {
-            return <PlayerCard player={player} key={index} />;
-          })}
+          <EntryForm/>
         </Wrapper>
       </div>
     );
